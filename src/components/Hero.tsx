@@ -16,7 +16,7 @@ export function Hero() {
                 <span className="text-orange-500">Food</span> & Delivery.
               </h1>
               <p className="mt-4 text-muted-foreground max-w-xl">
-                Best cooks and best delivery guys all at your service. Hot tasty food will reach you in 60 minutes.
+              Los mejores cocineros y los mejores repartidores a tu servicio. Comida sabrosa y caliente que llegará a ti en 60 minutos.
               </p>
             </div>
 
