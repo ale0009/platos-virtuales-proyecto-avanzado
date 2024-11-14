@@ -36,7 +36,7 @@ export function Layout({ children, currentSection, onNavigate }: LayoutProps) {
             <div className="rounded-full bg-rose-500 p-2">
               <Utensils className="h-5 w-5 text-white" />
             </div>
-            <span className="text-xl font-bold">FoodHub</span>
+            <span className="text-xl font-bold">Platos virtuales</span>
           </div>
           
           <nav className="hidden md:flex mx-6 flex-1 items-center justify-center space-x-4 md:space-x-6">
@@ -92,7 +92,7 @@ export function Layout({ children, currentSection, onNavigate }: LayoutProps) {
                 <div className="rounded-full bg-rose-500 p-2">
                   <Utensils className="h-5 w-5 text-white" />
                 </div>
-                <span className="text-xl font-bold">FoodHub</span>
+                <span className="text-xl font-bold">Platos virtuales</span>
               </div>
               <p className="text-sm text-muted-foreground">
                 Best cooks and best delivery guys all at your service.
@@ -129,7 +129,7 @@ export function Layout({ children, currentSection, onNavigate }: LayoutProps) {
             </div>
           </div>
           <div className="mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
-            © 2024 FoodHub. All rights reserved.
+            © 2024 Platos virtuales. All rights reserved.
           </div>
         </div>
       </footer>
