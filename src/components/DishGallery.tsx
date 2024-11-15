@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Dish } from '../types';
@@ -15,6 +15,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { CartContext } from '@/contexts/CartContext';
 
 interface DishGalleryProps {
   dishes: Dish[];
@@ -23,6 +24,7 @@ interface DishGalleryProps {
 }
 
 export function DishGallery({ dishes, selectedDish, onSelectDish }: DishGalleryProps) {
+  const { addItem } = useContext(CartContext) || { addItem: () => {} };
   const [zoom, setZoom] = useState(1);
 
   const handlePrevious = () => {
@@ -37,6 +39,10 @@ export function DishGallery({ dishes, selectedDish, onSelectDish }: DishGalleryP
     onSelectDish(dishes[nextIndex]);
   };
 
+  const handleAddToCart = () => {
+    addItem(selectedDish);
+  };
+
   return (
     <Card className="relative overflow-hidden bg-gradient-to-b from-background to-muted/20">
       <CardContent className="p-6 md:p-8">
@@ -46,6 +52,14 @@ export function DishGallery({ dishes, selectedDish, onSelectDish }: DishGalleryP
             <p className="text-muted-foreground">Explora el plato en 3D y descubre sus detalles</p>
           </div>
           <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={handleAddToCart}
+              className="flex items-center justify-center px-6 py-2 text-sm font-semibold text-white bg-rose-500 border border-transparent rounded-md hover:bg-rose-600 transition duration-200 ease-in-out shadow-md"
+            >
+              Comprar
+            </Button>
             <Button
               variant="outline"
               size="icon"
