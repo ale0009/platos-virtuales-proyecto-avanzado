@@ -3,9 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { Utensils, Menu as MenuIcon } from 'lucide-react';
-import { Section } from '../App';
 import { AuthDialog } from './AuthDialog';
-import { CartSheet } from './CartSheet';
 import { UserMenu } from './UserMenu';
 import { useAuth } from '@/contexts/AuthContext';
 import {
@@ -75,7 +73,6 @@ export function Layout({ children }: LayoutProps) {
                 </div>
               </SheetContent>
             </Sheet>
-            <CartSheet />
             <ModeToggle />
             {user ? <UserMenu /> : <AuthDialog />}
           </div>

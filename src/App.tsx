@@ -1,25 +1,19 @@
-import { useState } from 'react';
 import { Layout } from './components/Layout';
 import { Hero } from './components/Hero';
 import { SpecialOffers } from './components/SpecialOffers';
-import { DishGallery } from './components/DishGallery';
-import { NutritionPanel } from './components/NutritionPanel';
-import { FeedbackSection } from './components/FeedbackSection';
 import { About } from './components/About';
 import { Menu } from './components/Menu';
 import { Contact } from './components/Contact';
-import { dishes } from './data/dishes';
 import { ThemeProvider } from './components/ThemeProvider';
 import { AuthProvider } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
 import { Toaster } from '@/components/ui/sonner';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, } from 'react-router-dom';
 
 
 export type Section = 'home' | 'menu' | 'about' | 'contact';
 
 export default function App() {
-  const [selectedDish, setSelectedDish] = useState(dishes[0]);
 
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
