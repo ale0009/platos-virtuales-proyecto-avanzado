@@ -1,13 +1,8 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stage } from '@react-three/drei';
-import { Dish } from '../types';
 import { Suspense } from 'react';
 import {Model}  from "../components/modelado";
 
-interface DishViewerProps {
-  dish: Dish;
-  zoom?: number;
-}
 
 export function DishViewer() {
   return (
