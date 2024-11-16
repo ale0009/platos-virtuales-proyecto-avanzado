@@ -41,7 +41,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     
     if (user) {
       const { password: _, ...userWithoutPassword } = user;
-      setUser(userWithoutPassword);
       localStorage.setItem('user', JSON.stringify(userWithoutPassword));
       toast.success('Login successful!');
     } else {

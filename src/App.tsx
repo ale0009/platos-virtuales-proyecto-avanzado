@@ -6,7 +6,6 @@ import { Menu } from './components/Menu';
 import { Contact } from './components/Contact';
 import { ThemeProvider } from './components/ThemeProvider';
 import { AuthProvider } from './contexts/AuthContext';
-import { CartProvider } from './contexts/CartContext';
 import { Toaster } from '@/components/ui/sonner';
 import { Routes, Route, } from 'react-router-dom';
 
@@ -18,7 +17,6 @@ export default function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       <AuthProvider>
-        <CartProvider>
           <Layout>
             <Routes>
               {/* Ruta principal */}
@@ -48,7 +46,6 @@ export default function App() {
             </Routes>
           </Layout>
           <Toaster />
-        </CartProvider>
       </AuthProvider>
     </ThemeProvider>
   );

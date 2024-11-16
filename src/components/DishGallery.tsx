@@ -83,7 +83,7 @@ export function DishGallery({ dishes, selectedDish, onSelectDish }: DishGalleryP
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-4xl h-[80vh]">
-                <DishViewer dish={selectedDish} zoom={2} />
+                <DishViewer  />
               </DialogContent>
             </Dialog>
           </div>
@@ -91,7 +91,7 @@ export function DishGallery({ dishes, selectedDish, onSelectDish }: DishGalleryP
         
         <div className="relative group bg-card rounded-lg shadow-inner">
           <div className="h-[300px] md:h-[500px] w-full">
-            <DishViewer dish={selectedDish} zoom={zoom} />
+            <DishViewer  />
           </div>
           
           <Button
