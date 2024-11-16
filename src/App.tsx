@@ -36,14 +36,9 @@ export default function App() {
                     <div className="px-4 md:px-6 max-w-7xl mx-auto w-full">
                       <SpecialOffers />
                       <div className="grid gap-8 lg:grid-cols-2 mt-16">
-                        <DishGallery
-                          dishes={dishes}
-                          selectedDish={selectedDish}
-                          onSelectDish={setSelectedDish}
-                        />
+                       
                         <div className="space-y-8">
-                          <NutritionPanel dish={selectedDish} />s
-                          <FeedbackSection />
+                          
                         </div>
                       </div>
                     </div>
