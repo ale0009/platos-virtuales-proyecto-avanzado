@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState} from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Dish } from '../types';
@@ -15,7 +15,6 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { CartContext } from '@/contexts/CartContext';
 
 interface DishGalleryProps {
   dishes: Dish[];
@@ -24,7 +23,6 @@ interface DishGalleryProps {
 }
 
 export function DishGallery({ dishes, selectedDish, onSelectDish }: DishGalleryProps) {
-  const { addItem } = useContext(CartContext) || { addItem: () => {} };
   const [zoom, setZoom] = useState(1);
 
   const handlePrevious = () => {
@@ -40,7 +38,7 @@ export function DishGallery({ dishes, selectedDish, onSelectDish }: DishGalleryP
   };
 
   const handleAddToCart = () => {
-    addItem(selectedDish);
+    
   };
 
   return (
