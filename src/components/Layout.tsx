@@ -1,5 +1,7 @@
 import { ModeToggle } from './ModeToggle';
 import { Button } from '@/components/ui/button';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+
 import { Utensils, Menu as MenuIcon } from 'lucide-react';
 import { Section } from '../App';
 import { AuthDialog } from './AuthDialog';
@@ -14,40 +16,40 @@ import {
 
 interface LayoutProps {
   children: React.ReactNode;
-  currentSection: Section;
-  onNavigate: (section: Section) => void;
 }
 
-const navItems: { label: string; value: Section }[] = [
-  { label: 'Home', value: 'home' },
-  { label: 'Menu', value: 'menu' },
-  { label: 'About', value: 'about' },
-  { label: 'Contact', value: 'contact' },
+const navItems: { label: string; path: string }[] = [
+  { label: 'Home', path: '/' },
+  { label: 'Menu', path: '/menu' },
+  { label: 'About', path: '/about' },
+  { label: 'Contact', path: '/contact' },
 ];
 
-export function Layout({ children, currentSection, onNavigate }: LayoutProps) {
+export function Layout({ children }: LayoutProps) {
   const { user } = useAuth();
+  const location = useLocation(); // Detecta la ruta actual
+  const navigate = useNavigate(); // Para navegación manual
 
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="flex h-16 items-center px-4 md:px-6 max-w-7xl mx-auto">
-          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => onNavigate('home')}>
+          <div className="flex items-center space-x-2 cursor-pointer" onClick={() => navigate('/')}>
             <div className="rounded-full bg-rose-500 p-2">
               <Utensils className="h-5 w-5 text-white" />
             </div>
-            <span className="text-xl font-bold">FoodHub</span>
+            <span className="text-xl font-bold">Platos virtuales</span>
           </div>
           
           <nav className="hidden md:flex mx-6 flex-1 items-center justify-center space-x-4 md:space-x-6">
             {navItems.map((item) => (
+              <Link to={item.path} key={item.path}>
               <Button
-                key={item.value}
-                variant={currentSection === item.value ? "default" : "ghost"}
-                onClick={() => onNavigate(item.value)}
+                variant={location.pathname === item.path ? "default" : "ghost"}
               >
                 {item.label}
               </Button>
+            </Link>
             ))}
           </nav>
 
@@ -61,14 +63,14 @@ export function Layout({ children, currentSection, onNavigate }: LayoutProps) {
               <SheetContent side="left">
                 <div className="flex flex-col space-y-4 mt-8">
                   {navItems.map((item) => (
-                    <Button
-                      key={item.value}
-                      variant={currentSection === item.value ? "default" : "ghost"}
-                      onClick={() => onNavigate(item.value)}
-                      className="w-full justify-start"
-                    >
-                      {item.label}
-                    </Button>
+                   <Link to={item.path} key={item.path}>
+                   <Button
+                     variant={location.pathname === item.path ? "default" : "ghost"}
+                     className="w-full justify-start"
+                   >
+                     {item.label}
+                   </Button>
+                 </Link>
                   ))}
                 </div>
               </SheetContent>
@@ -92,7 +94,7 @@ export function Layout({ children, currentSection, onNavigate }: LayoutProps) {
                 <div className="rounded-full bg-rose-500 p-2">
                   <Utensils className="h-5 w-5 text-white" />
                 </div>
-                <span className="text-xl font-bold">FoodHub</span>
+                <span className="text-xl font-bold">Platos virtuales</span>
               </div>
               <p className="text-sm text-muted-foreground">
                 Best cooks and best delivery guys all at your service.
@@ -101,9 +103,9 @@ export function Layout({ children, currentSection, onNavigate }: LayoutProps) {
             <div>
               <h3 className="font-semibold mb-4">Company</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="cursor-pointer hover:text-foreground" onClick={() => onNavigate('about')}>About Us</li>
+                <li className="cursor-pointer hover:text-foreground" onClick={() => navigate('/about')}>About Us</li>
                 <li className="cursor-pointer hover:text-foreground">Careers</li>
-                <li className="cursor-pointer hover:text-foreground" onClick={() => onNavigate('contact')}>Contact Us</li>
+                <li className="cursor-pointer hover:text-foreground" onClick={() => navigate('/contact')}>Contact Us</li>
                 <li className="cursor-pointer hover:text-foreground">Blog</li>
               </ul>
             </div>
@@ -129,7 +131,7 @@ export function Layout({ children, currentSection, onNavigate }: LayoutProps) {
             </div>
           </div>
           <div className="mt-12 pt-8 border-t text-center text-sm text-muted-foreground">
-            © 2024 FoodHub. All rights reserved.
+            © 2024 Platos virtuales. All rights reserved.
           </div>
         </div>
       </footer>

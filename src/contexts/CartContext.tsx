@@ -1,8 +1,15 @@
 import { createContext, useContext, useState } from 'react';
-import { CartContextType, CartItem, Dish } from '@/types';
+import { CartContextType as CartContextTypeImported, CartItem, Dish } from '@/types';
 import { toast } from 'sonner';
 
-const CartContext = createContext<CartContextType | undefined>(undefined);
+// Define el tipo del contexto
+interface CartContextType {
+  addItem: (item: Dish) => void;
+  // ... otros métodos o propiedades si es necesario
+}
+
+// Asegúrate de que el contexto use el tipo definido
+export const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
