@@ -56,13 +56,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     0
   );
 
-  return (
-    <CartContext.Provider
-      value={{ items, addItem, removeItem, updateQuantity, clearCart, total }}
-    >
-      {children}
-    </CartContext.Provider>
-  );
 }
 
 export const useCart = () => {

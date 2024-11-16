@@ -9,7 +9,7 @@ interface DishViewerProps {
   zoom?: number;
 }
 
-export function DishViewer({ dish, zoom = 1 }: DishViewerProps) {
+export function DishViewer() {
   return (
     <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
       <Suspense fallback={null}>
