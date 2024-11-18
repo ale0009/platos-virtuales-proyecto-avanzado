@@ -1,7 +1,7 @@
 import { ModeToggle } from './ModeToggle';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-
+import { CartSheet } from './CartSheets';
 import { Utensils, Menu as MenuIcon } from 'lucide-react';
 import { AuthDialog } from './AuthDialog';
 import { UserMenu } from './UserMenu';
@@ -16,17 +16,20 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-const navItems: { label: string; path: string }[] = [
-  { label: 'Home', path: '/' },
-  { label: 'Menu', path: '/menu' },
-  { label: 'About', path: '/about' },
-  { label: 'Contact', path: '/contact' },
-];
+
 
 export function Layout({ children }: LayoutProps) {
   const { user } = useAuth();
   const location = useLocation(); // Detecta la ruta actual
   const navigate = useNavigate(); // Para navegación manual
+
+  const navItems: { label: string; path: string }[] = [
+    { label: 'Home', path: '/' },
+    { label: 'Menu', path: '/menu' },
+    { label: 'About', path: '/about' },
+    { label: 'Contact', path: '/contact' },
+    ...(user?.role === 'admin' ? [{ label: 'Admin', path: 'admin' }] : []),
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -73,6 +76,7 @@ export function Layout({ children }: LayoutProps) {
                 </div>
               </SheetContent>
             </Sheet>
+            <CartSheet />
             <ModeToggle />
             {user ? <UserMenu /> : <AuthDialog />}
           </div>
