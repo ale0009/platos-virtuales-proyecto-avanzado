@@ -8,16 +8,8 @@ import { toast } from 'sonner';
 import { 
   ChevronLeft, 
   ChevronRight,
-  Maximize2,
-  MinusCircle,
-  PlusCircle,
   ShoppingCart
 } from 'lucide-react';
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 
 interface DishGalleryProps {
   dishes: Dish[];
@@ -26,7 +18,6 @@ interface DishGalleryProps {
 }
 
 export function DishGallery({ dishes, selectedDish, onSelectDish }: DishGalleryProps) {
-  const [zoom, setZoom] = useState(1);
   const { addItem } = useCart();
 
   const handlePrevious = () => {
