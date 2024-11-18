@@ -1,17 +1,18 @@
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stage } from '@react-three/drei';
 import { Suspense } from 'react';
-import {Model}  from "../components/modelado";
+import { Dish } from '../types';
+import {Model}  from "../components/Model";
 
-
-export function DishViewer() {
+interface DishViewerProps {
+  dish: Dish;
+}
+export function DishViewer({ dish}: DishViewerProps) {
   return (
     <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
       <Suspense fallback={null}>
         <Stage environment="city" intensity={0.6}>
-          {/* Temporary placeholder 3D object until we have actual models */}
-          
-          <Model/>
+          <Model modelPath={dish.modelPath}/>
         </Stage>
       </Suspense>
       <OrbitControls 

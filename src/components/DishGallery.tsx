@@ -1,14 +1,17 @@
 import { useState} from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useCart } from '@/contexts/CartContext';
 import { Dish } from '../types';
 import { DishViewer } from './DishViewer';
+import { toast } from 'sonner';
 import { 
   ChevronLeft, 
   ChevronRight,
   Maximize2,
   MinusCircle,
-  PlusCircle
+  PlusCircle,
+  ShoppingCart
 } from 'lucide-react';
 import {
   Dialog,
@@ -24,6 +27,7 @@ interface DishGalleryProps {
 
 export function DishGallery({ dishes, selectedDish, onSelectDish }: DishGalleryProps) {
   const [zoom, setZoom] = useState(1);
+  const { addItem } = useCart();
 
   const handlePrevious = () => {
     const currentIndex = dishes.findIndex(dish => dish.id === selectedDish.id);
@@ -38,7 +42,8 @@ export function DishGallery({ dishes, selectedDish, onSelectDish }: DishGalleryP
   };
 
   const handleAddToCart = () => {
-    
+    addItem(selectedDish);
+    toast.success(`${selectedDish.name} added to cart!`);
   };
 
   return (
@@ -50,46 +55,20 @@ export function DishGallery({ dishes, selectedDish, onSelectDish }: DishGalleryP
             <p className="text-muted-foreground">Explora el plato en 3D y descubre sus detalles</p>
           </div>
           <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={handleAddToCart}
-              className="flex items-center justify-center px-6 py-2 text-sm font-semibold text-white bg-rose-500 border border-transparent rounded-md hover:bg-rose-600 transition duration-200 ease-in-out shadow-md"
-            >
-              Comprar
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => setZoom(Math.max(0.5, zoom - 0.1))}
-              className="hover:bg-primary hover:text-primary-foreground"
-            >
-              <MinusCircle className="h-4 w-4" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={() => setZoom(Math.min(2, zoom + 0.1))}
-              className="hover:bg-primary hover:text-primary-foreground"
-            >
-              <PlusCircle className="h-4 w-4" />
-            </Button>
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button variant="outline" size="icon" className="hover:bg-primary hover:text-primary-foreground">
-                  <Maximize2 className="h-4 w-4" />
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-4xl h-[80vh]">
-                <DishViewer  />
-              </DialogContent>
-            </Dialog>
+          <Button 
+                onClick={handleAddToCart}
+                className="bg-rose-500 hover:bg-rose-600 text-white gap-2"
+              >
+                <ShoppingCart className="h-4 w-4" />
+                Add to Cart
+              </Button>
+            
           </div>
         </div>
         
         <div className="relative group bg-card rounded-lg shadow-inner">
           <div className="h-[300px] md:h-[500px] w-full">
-            <DishViewer  />
+            <DishViewer dish={selectedDish} />
           </div>
           
           <Button
@@ -111,7 +90,7 @@ export function DishGallery({ dishes, selectedDish, onSelectDish }: DishGalleryP
           </Button>
         </div>
 
-        <div className="flex gap-2 mt-6 overflow-x-auto pb-2 scrollbar-hide">
+        <div className="grid grid-cols-3 gap-2 mt-6  pb-2 scrollbar-hide">
           {dishes.map((dish) => (
             <Button
               key={dish.id}
